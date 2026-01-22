@@ -26,3 +26,9 @@
   border-bottom: 1px solid white;
   border-color: rgba(255, 255, 255, 0.1);
 }
+
+@media (max-width: 768px) {
+  .details-top {
+    flex-direction: column;
+  }
+}
