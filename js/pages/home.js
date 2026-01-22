@@ -25,17 +25,13 @@ async function displaySlider() {
 
   const slides = results
     .map((movie) => {
-      const img = movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : "../../images/no-image.jpg";
-
       return `
         <div class="swiper-slide">
           <a href="movie-details.html?id=${movie.id}">
-            <img src="${img}" alt="${movie.title}" />
+            <img src="${movie.poster}" alt="${movie.title}" />
           </a>
           <h4 class="swiper-rating">
-            <i class="fas fa-star text-secondary"> ${movie.vote_average.toFixed(1)} / 10</i>
+            <i class="fas fa-star text-secondary"> ${movie.rating} / 10</i>
           </h4>
         </div>`;
     })

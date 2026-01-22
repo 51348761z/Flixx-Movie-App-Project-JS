@@ -1,7 +1,5 @@
 export function createTvShowCard(show) {
-  const img = show.poster_path
-    ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
-    : "images/no-image.jpg";
+  const img = show.poster || "images/no-image.jpg";
   const div = document.createElement("div");
   div.className = "card";
   div.innerHTML = `
@@ -10,8 +8,8 @@ export function createTvShowCard(show) {
         <img src="${img}" class="card-img-top" alt="${show.name}" />
       </a>
       <div class="card-body">
-        <h5 class="card-title">${show.name}</h5>
-        <p class="card-text"><small class="text-muted">${show.first_air_date}</small></p>
+        <h5 class="card-title">${show.title || show.name}</h5>
+        <p class="card-text"><small class="text-muted">${show.subtitle}</small></p>
       </div>
     </div>
   `;

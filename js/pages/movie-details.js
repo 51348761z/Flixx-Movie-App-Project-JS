@@ -9,8 +9,8 @@ export async function renderMovieDetails() {
   const movie = await TMDBService.fetchMovieDetailsById(movieId);
 
   // Overlay for background image
-  if (movie.backdrop_path) {
-    displayBackgroundImage("movie", movie.backdrop_path);
+  if (movie.backdrop) {
+    displayBackgroundImage("movie", movie.backdrop);
   }
 
   const movieDetailsCard = createMovieDetailsCard(movie);
@@ -20,9 +20,9 @@ export async function renderMovieDetails() {
 }
 
 // Display Backdrop On Details Page
-function displayBackgroundImage(type, backgroundPath) {
+function displayBackgroundImage(type, backgroundUrl) {
   const overlayDiv = document.createElement("div");
-  overlayDiv.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${backgroundPath})`;
+  overlayDiv.style.backgroundImage = `url(${backgroundUrl})`;
   overlayDiv.style.backgroundSize = "cover";
   overlayDiv.style.backgroundPosition = "center";
   overlayDiv.style.backgroundRepeat = "no-repeat";

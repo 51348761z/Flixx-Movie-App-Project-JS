@@ -1,8 +1,6 @@
 export function createTvShowDetailsCard(show) {
-  const img = show.poster_path
-    ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
-    : "images/no-image.jpg";
-  const rating = Number(show.vote_average ?? 0).toFixed(1);
+  const img = show.poster || "images/no-image.jpg";
+  const rating = show.rating || "0.0";
   const lastAirDate = show.last_air_date || "N/A";
   const lastEpisodeDate = show.last_episode_to_air?.air_date || "N/A";
   const genres = show.genres || [];
@@ -44,8 +42,4 @@ export function createTvShowDetailsCard(show) {
         </div>
       `;
   return div;
-}
-
-function addCommasToNumber(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

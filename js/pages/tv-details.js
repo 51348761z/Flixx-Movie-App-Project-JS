@@ -9,8 +9,8 @@ export async function renderTvShowDetails() {
   const show = await TMDBService.fetchTvShowDetailsById(showId);
 
   // Overlay for background image
-  if (show.backdrop_path) {
-    displayBackgroundImage("show", show.backdrop_path);
+  if (show.backdrop) {
+    displayBackgroundImage("show", show.backdrop);
   }
 
   const tvShowDetailsCard = createTvShowDetailsCard(show);
@@ -20,9 +20,9 @@ export async function renderTvShowDetails() {
 }
 
 // Display Backdrop On Details Page
-function displayBackgroundImage(type, backgroundPath) {
+function displayBackgroundImage(type, backgroundUrl) {
   const overlayDiv = document.createElement("div");
-  overlayDiv.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${backgroundPath})`;
+  overlayDiv.style.backgroundImage = `url(${backgroundUrl})`;
   overlayDiv.style.backgroundSize = "cover";
   overlayDiv.style.backgroundPosition = "center";
   overlayDiv.style.backgroundRepeat = "no-repeat";

@@ -1,8 +1,6 @@
 export function createMovieDetailsCard(movie) {
-  const img = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : "images/no-image.jpg";
-  const rating = Number(movie.vote_average ?? 0).toFixed(1);
+  const img = movie.poster || "images/no-image.jpg";
+  const rating = movie.rating || "0.0";
   const releaseDate = movie.release_date || "N/A";
   const genres = movie.genres || [];
   const companies = movie.production_companies || [];
@@ -34,9 +32,9 @@ export function createMovieDetailsCard(movie) {
         <div class="details-bottom">
           <h2>Movie info</h2>
           <ul>
-            <li><span class="text-secondary">Budget:</span> $${addCommasToNumber(movie.budget || 0)}</li>
-            <li><span class="text-secondary">Revenue:</span> $${addCommasToNumber(movie.revenue || 0)}</li>
-            <li><span class="text-secondary">Runtime:</span> ${addCommasToNumber(movie.runtime || 0)} minutes</li>
+            <li><span class="text-secondary">Budget:</span> $${movie.budget || 0}</li>
+            <li><span class="text-secondary">Revenue:</span> $${movie.revenue || 0}</li>
+            <li><span class="text-secondary">Runtime:</span> ${movie.runtime || 0} minutes</li>
             <li><span class="text-secondary">Status:</span> ${movie.status}</li>
           </ul>
           <h4>Production Companies</h4>
@@ -44,8 +42,4 @@ export function createMovieDetailsCard(movie) {
         </div>
       `;
   return div;
-}
-
-function addCommasToNumber(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

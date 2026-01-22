@@ -1,11 +1,11 @@
 export class Spinner {
-  static showSpinner() {
+  static show() {
     const el = document.querySelector(".spinner");
     if (!el) return;
     el.classList.add("show");
   }
 
-  static hideSpinner() {
+  static hide() {
     const el = document.querySelector(".spinner");
     if (!el) return;
     el.classList.remove("show");

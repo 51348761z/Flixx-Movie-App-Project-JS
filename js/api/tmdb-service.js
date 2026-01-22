@@ -1,56 +1,102 @@
-import { Spinner } from "../components/spiner.js";
-
-const API_URL = "https://api.themoviedb.org/3";
-const AUTH_HEADER = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZTNkYjk2Njk2NWFlYmM4MWY0ZTMxMTMxZGQzNDFkMCIsIm5iZiI6MTc2OTA2OTI4NS45OTcsInN1YiI6IjY5NzFkYWU1ZmYzYjUzMWYyMWUzNmI5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PTkwN6qn-KSDjnmk9_irv9eSaIxvVG_iuZM2StRZkTc`;
-const DEFAULT_OPTIONS = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: AUTH_HEADER,
-  },
-};
+import { API_URL } from "../config/constants.js";
+import {
+  buildBackdrop,
+  buildPoster,
+  formatCurrency,
+  formatDate,
+  formatRating,
+} from "../utils/format.js";
+import { getJSON } from "./http.js";
 
 export class TMDBService {
   static async fetchPopularMovies() {
-    return this.fetchApiData("movie/popular");
+    const data = await this.fetchApiData("movie/popular");
+    return {
+      ...data,
+      results: data.results.map((movie) => ({
+        id: movie.id,
+        title: movie.title,
+        subtitle: formatDate(movie.release_date),
+        poster: buildPoster(movie.poster_path),
+        rating: formatRating(movie.vote_average),
+      })),
+    };
   }
 
   static async fetchPopularTvShows() {
-    return this.fetchApiData("tv/popular");
+    const data = await this.fetchApiData("tv/popular");
+    return {
+      ...data,
+      results: data.results.map((show) => ({
+        id: show.id,
+        title: show.name,
+        subtitle: formatDate(show.first_air_date),
+        poster: buildPoster(show.poster_path),
+        rating: formatRating(show.vote_average),
+      })),
+    };
   }
 
   static async fetchMovieDetailsById(id) {
-    return this.fetchApiData(`movie/${id}`);
+    const movie = await this.fetchApiData(`movie/${id}`);
+    return {
+      ...movie,
+      poster: buildPoster(movie.poster_path),
+      backdrop: buildBackdrop(movie.backdrop_path),
+      rating: formatRating(movie.vote_average),
+      release_date: formatDate(movie.release_date),
+      budget: formatCurrency(movie.budget),
+      revenue: formatCurrency(movie.revenue),
+      runtime: movie.runtime || 0,
+    };
   }
 
   static async fetchTvShowDetailsById(id) {
-    return this.fetchApiData(`tv/${id}`);
+    const show = await this.fetchApiData(`tv/${id}`);
+    return {
+      ...show,
+      poster: buildPoster(show.poster_path),
+      backdrop: buildBackdrop(show.backdrop_path),
+      rating: formatRating(show.vote_average),
+      last_air_date: formatDate(show.last_air_date),
+      last_episode_to_air: show.last_episode_to_air || {},
+    };
   }
 
   static async fetchNowPlayingMovies() {
-    return this.fetchApiData("movie/now_playing");
+    const data = await this.fetchApiData("movie/now_playing");
+    return {
+      ...data,
+      results: data.results.map((movie) => ({
+        id: movie.id,
+        title: movie.title,
+        poster: buildPoster(movie.poster_path),
+        rating: formatRating(movie.vote_average),
+      })),
+    };
   }
 
   static async fetchSearch({ type = "movie", query = "", page = 1 }) {
     const searchType = type === "tv" ? "tv" : "movie";
     const params = new URLSearchParams({ query, page, language: "en-US" });
 
-    return this.fetchApiData(`search/${searchType}?${params.toString()}`);
+    const data = await this.fetchApiData(
+      `search/${searchType}?${params.toString()}`,
+    );
+
+    return {
+      ...data,
+      results: data.results.map((item) => ({
+        id: item.id,
+        title: item.title || item.name,
+        subtitle: formatDate(item.release_date || item.first_air_date),
+        poster: buildPoster(item.poster_path),
+        rating: formatRating(item.vote_average),
+      })),
+    };
   }
 
   static async fetchApiData(endpoint) {
-    Spinner.showSpinner();
-
-    try {
-      const response = await fetch(`${API_URL}/${endpoint}`, DEFAULT_OPTIONS);
-
-      if (!response.ok) {
-        throw new Error(`API request failed: ${response.status}`);
-      }
-
-      return response.json();
-    } finally {
-      Spinner.hideSpinner();
-    }
+    return getJSON(`${API_URL}/${endpoint}`);
   }
 }
