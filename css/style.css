@@ -41,6 +41,18 @@ ul {
   font-weight: 700;
 }
 
+.back {
+  margin-top: 30px;
+}
+
+.text-primary {
+  color: var(--color-secondary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
 .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -213,6 +225,38 @@ swiper {
 .card-body {
   padding: 10px;
   font-size: 20px;
+}
+
+/* Movie Details */
+.details-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 0 30px;
+
+  img {
+    width: 400px;
+    height: 100%;
+    margin-right: 60px;
+    object-fit: cover;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  .btn {
+    margin-top: 20px;
+  }
+}
+
+.details-bottom {
+  li {
+    margin: 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid white;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 /* Footer */
