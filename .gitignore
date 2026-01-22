@@ -1,0 +1,31 @@
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+!*.code-workspace
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# js
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+# dotenv environment variables files
+.env
+.env.test
+.env.production
+.env.local
+.env.*.local
+
+# Mac system files
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
