@@ -1,4 +1,5 @@
 import { renderHomePage } from "./pages/home.js";
+import { renderMovieDetails } from "./pages/movie-details.js";
 import { renderShowPage } from "./pages/shows.js";
 
 const global = { currentPage: window.location.pathname };
@@ -27,6 +28,7 @@ function init() {
       break;
     case "/movie-details.html":
       console.log("Movie Details");
+      renderMovieDetails();
       break;
     case "/tv-details.html":
       console.log("TV Details");
