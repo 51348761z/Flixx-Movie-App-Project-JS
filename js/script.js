@@ -1,9 +1,12 @@
 import { renderHomePage } from "./pages/home.js";
 import { renderMovieDetails } from "./pages/movie-details.js";
+import { renderSearchPage } from "./pages/search.js";
 import { renderShowPage } from "./pages/shows.js";
 import { renderTvShowDetails } from "./pages/tv-details.js";
 
-const global = { currentPage: window.location.pathname };
+const global = {
+  currentPage: window.location.pathname,
+};
 
 const routes = {
   "/": renderHomePage,
@@ -11,6 +14,7 @@ const routes = {
   "/shows.html": renderShowPage,
   "/movie-details.html": renderMovieDetails,
   "/tv-details.html": renderTvShowDetails,
+  "/search.html": renderSearchPage,
 };
 
 // Highlight active link

@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/spinner.css" />
+    <link rel="stylesheet" href="css/alert.css" />
+    <link rel="stylesheet" href="css/pages/home.css" />
     <script src="lib/swiper.js"></script>
     <script type="module" src="js/script.js" defer></script>
     <title>Flixx</title>
@@ -39,6 +41,42 @@
         </nav>
       </div>
     </header>
+
+    <!-- Search Movies -->
+    <section class="search">
+      <div class="container">
+        <div id="alert"></div>
+        <form action="/search.html" class="search-form">
+          <!-- movies and shows radio box -->
+          <div class="search-radio">
+            <input type="radio" name="type" id="movie" value="movie" checked />
+            <label for="movie">Movies</label>
+            <input type="radio" name="type" id="tv" value="tv" />
+            <label for="tc">TV Shows</label>
+          </div>
+          <div class="search-flex">
+            <input
+              type="text"
+              id="search-term"
+              name="search-term"
+              placeholder="Enter search term"
+            />
+            <button type="submit" class="btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Display movies -->
+    <section id="search-results-wrapper" class="container">
+      <heading id="search-results-heading"></heading>
+      <div id="search-results" class="grid"></div>
+
+      <!-- Pagination -->
+      <div id="pagination"></div>
+    </section>
 
     <!-- Footer -->
     <footer class="main-footer">

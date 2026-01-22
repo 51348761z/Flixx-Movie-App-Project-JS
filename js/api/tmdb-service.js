@@ -31,14 +31,18 @@ export class TMDBService {
     return this.fetchApiData("movie/now_playing");
   }
 
+  static async fetchSearch({ type = "movie", query = "", page = 1 }) {
+    const searchType = type === "tv" ? "tv" : "movie";
+    const params = new URLSearchParams({ query, page, language: "en-US" });
+
+    return this.fetchApiData(`search/${searchType}?${params.toString()}`);
+  }
+
   static async fetchApiData(endpoint) {
     Spinner.showSpinner();
 
     try {
-      const response = await fetch(
-        `${API_URL}/${endpoint}?language=en-US&page=1`,
-        DEFAULT_OPTIONS,
-      );
+      const response = await fetch(`${API_URL}/${endpoint}`, DEFAULT_OPTIONS);
 
       if (!response.ok) {
         throw new Error(`API request failed: ${response.status}`);

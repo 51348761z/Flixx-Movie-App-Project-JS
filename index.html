@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/pages/home.css" />
     <link rel="stylesheet" href="css/spinner.css" />
+    <link rel="stylesheet" href="css/alert.css" />
     <script src="lib/swiper.js"></script>
     <script type="module" src="js/script.js" defer></script>
     <title>Flixx</title>
@@ -54,20 +55,20 @@
     <!-- Search Movies -->
     <section class="search">
       <div class="container">
-        <div class="alert"></div>
+        <div id="alert"></div>
         <form action="/search.html" class="search-form">
           <!-- movies and shows radio box -->
           <div class="search-radio">
             <input type="radio" name="type" id="movie" value="movie" checked />
-            <label for="movies">Movies</label>
+            <label for="movie">Movies</label>
             <input type="radio" name="type" id="tv" value="tv" />
-            <label for="shows">TV Shows</label>
+            <label for="tc">TV Shows</label>
           </div>
           <div class="search-flex">
             <input
               type="text"
               id="search-term"
-              name="search-item"
+              name="search-term"
               placeholder="Enter search term"
             />
             <button type="submit" class="btn">
