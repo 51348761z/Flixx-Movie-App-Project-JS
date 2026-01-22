@@ -1,0 +1,127 @@
+.active {
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+.back {
+  margin-top: 30px;
+}
+
+.text-primary,
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-secondary);
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: var(--color-secondary);
+  color: black;
+}
+
+.btn:disabled {
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+  background-color: transparent;
+  color: white;
+}
+
+.main-header {
+  padding: 20px 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.main-header .logo {
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.main-header ul {
+  display: flex;
+}
+
+.main-header ul li {
+  margin-left: 20px;
+}
+
+.main-header ul li a {
+  font-size: 16px;
+}
+
+.main-header ul li a:hover {
+  color: var(--color-secondary);
+}
+
+.card {
+  background-color: #04376b;
+  padding: 5px;
+}
+
+.card img {
+  width: 100%;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  transition: all 0.5s ease-in-out;
+  background-color: #0a4b8f;
+}
+
+.card-body {
+  padding: 10px;
+  font-size: 20px;
+}
+
+.main-footer {
+  background-color: #020d18;
+  padding: 20px 0;
+  margin-top: 20px;
+}
+
+.main-footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-footer .logo {
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.main-footer .social-links {
+  display: flex;
+  font-size: 20px;
+}
+
+.main-footer .social-links a {
+  margin-left: 10px;
+  color: white;
+}
+
+.main-footer .social-links a:hover {
+  color: var(--color-secondary);
+}
