@@ -1,3 +1,5 @@
+import { renderHomePage } from "./pages/home.js";
+
 const global = { currentPage: window.location.pathname };
 
 // Highlight active link
@@ -16,6 +18,7 @@ function init() {
     case "/":
     case "/index.html":
       console.log("Home");
+      renderHomePage();
       break;
     case "/shows.html":
       console.log("Shows");
