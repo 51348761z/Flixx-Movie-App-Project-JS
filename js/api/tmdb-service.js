@@ -17,6 +17,10 @@ export class TMDBService {
     return this.fetchApiData(`tv/${id}`);
   }
 
+  static async fetchNowPlayingMovies() {
+    return this.fetchApiData("movie/now_playing");
+  }
+
   static async fetchApiData(endpoint) {
     const API_URL = "https://api.themoviedb.org/3";
 
