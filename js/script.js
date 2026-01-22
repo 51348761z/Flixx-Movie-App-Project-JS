@@ -1,6 +1,7 @@
 import { renderHomePage } from "./pages/home.js";
 import { renderMovieDetails } from "./pages/movie-details.js";
 import { renderShowPage } from "./pages/shows.js";
+import { renderTvShowDetails } from "./pages/tv-details.js";
 
 const global = { currentPage: window.location.pathname };
 
@@ -32,6 +33,7 @@ function init() {
       break;
     case "/tv-details.html":
       console.log("TV Details");
+      renderTvShowDetails();
       break;
     case "/search.html":
       console.log("Search");

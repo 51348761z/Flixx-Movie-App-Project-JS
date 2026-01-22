@@ -13,6 +13,10 @@ export class TMDBService {
     return this.fetchApiData(`movie/${id}`);
   }
 
+  static async fetchTvShowDetailsById(id) {
+    return this.fetchApiData(`tv/${id}`);
+  }
+
   static async fetchApiData(endpoint) {
     const API_URL = "https://api.themoviedb.org/3";
 

@@ -1,16 +1,17 @@
 import { TMDBService } from "../api/tmdb-service.js";
-import { createMovieDetailsCard } from "../components/movie-details-card.js";
+import { createTvShowDetailsCard } from "../components/tv-details-card.js";
 
-// Display movie details
-export async function renderMovieDetails() {
-  const movieId = window.location.search.split("=")[1];
-  const movie = await TMDBService.fetchMovieDetailsById(movieId);
+// Display show details
+export async function renderTvShowDetails() {
+  const showId = window.location.search.split("=")[1];
+  const show = await TMDBService.fetchTvShowDetailsById(showId);
+  console.log(show);
 
   // Overlay for background image
-  displayBackgroundImage("movie", movie.backdrop_path);
+  displayBackgroundImage("show", show.backdrop_path);
 
-  const movieDetailsCard = createMovieDetailsCard(movie);
-  document.querySelector(".movie-details").appendChild(movieDetailsCard);
+  const tvShowDetailsCard = createTvShowDetailsCard(show);
+  document.querySelector(".show-details").appendChild(tvShowDetailsCard);
 }
 
 // Display Backdrop On Details Page
