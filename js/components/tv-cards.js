@@ -7,7 +7,7 @@ export function createTvShowCard(show) {
   div.innerHTML = `
     <div class="card">
       <a href="tv-details.html?id=${show.id}">
-        <img src="${img}" class="car-img-top" alt="${show.name}" />
+        <img src="${img}" class="card-img-top" alt="${show.name}" />
       </a>
       <div class="card-body">
         <h5 class="card-title">${show.name}</h5>

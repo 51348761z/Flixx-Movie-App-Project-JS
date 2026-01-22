@@ -7,7 +7,7 @@ export function createMovieCard(movie) {
   div.innerHTML = `
     <div class="card">
       <a href="movie-details.html?id=${movie.id}">
-        <img src="${img}" class="car-img-top" alt="${movie.title}" />
+        <img src="${img}" class="card-img-top" alt="${movie.title}" />
       </a>
       <div class="card-body">
         <h5 class="card-title">${movie.title}</h5>

@@ -2,6 +2,11 @@ export function createTvShowDetailsCard(show) {
   const img = show.poster_path
     ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
     : "images/no-image.jpg";
+  const rating = Number(show.vote_average ?? 0).toFixed(1);
+  const lastAirDate = show.last_air_date || "N/A";
+  const lastEpisodeDate = show.last_episode_to_air?.air_date || "N/A";
+  const genres = show.genres || [];
+  const companies = show.production_companies || [];
   const div = document.createElement("div");
   div.innerHTML = `
         <div class="details-top">
@@ -15,27 +20,27 @@ export function createTvShowDetailsCard(show) {
           <div>
             <h2>${show.name}</h2>
             <p>
-              <i class="fas fastart text-primary">${show.vote_average.toFixed(1)} / 10</i>
+              <i class="fas fastart text-primary">${rating} / 10</i>
             </p>
-            <p class="text-muted">Last Air Date: ${show.last_air_date}</p>
+            <p class="text-muted">Last Air Date: ${lastAirDate}</p>
             <p>${show.overview}</p>
             <h5>Genres</h5>
             <ul class="list-group">
-              ${show.genres.map((genre) => `<li>${genre.name}<li/>`).join("")}
+              ${genres.map((genre) => `<li>${genre.name}</li>`).join("")}
             </ul>
-            <a href="${show.homepage}" target="_blank" class="btn">Visit Showshow Homepage</a>
+            <a href="${show.homepage || "#"}" target="_blank" class="btn">Visit Showshow Homepage</a>
           </div>
         </div>
 
         <div class="details-bottom">
           <h2>Show info</h2>
           <ul>
-            <li><span class="text-secondary">Number of Episodes:</span> ${show.number_of_episodes}</li>
-            <li><span class="text-secondary">Last Episode To Air:</span> ${show.last_episode_to_air.air_date}</li>
+            <li><span class="text-secondary">Number of Episodes:</span> ${show.number_of_episodes ?? 0}</li>
+            <li><span class="text-secondary">Last Episode To Air:</span> ${lastEpisodeDate}</li>
             <li><span class="text-secondary">Status:</span> ${show.status}</li>
           </ul>
           <h4>Production Companies</h4>
-          <div class="list-group">${show.production_companies.map((company) => company.name).join(", ")}</div>
+          <div class="list-group">${companies.map((company) => company.name).join(", ")}</div>
         </div>
       `;
   return div;

@@ -3,15 +3,20 @@ import { createTvShowDetailsCard } from "../components/tv-details-card.js";
 
 // Display show details
 export async function renderTvShowDetails() {
-  const showId = window.location.search.split("=")[1];
+  const showId = new URLSearchParams(window.location.search).get("id");
+  if (!showId) return;
+
   const show = await TMDBService.fetchTvShowDetailsById(showId);
-  console.log(show);
 
   // Overlay for background image
-  displayBackgroundImage("show", show.backdrop_path);
+  if (show.backdrop_path) {
+    displayBackgroundImage("show", show.backdrop_path);
+  }
 
   const tvShowDetailsCard = createTvShowDetailsCard(show);
-  document.querySelector(".show-details").appendChild(tvShowDetailsCard);
+  const container = document.querySelector(".show-details");
+  if (!container) return;
+  container.appendChild(tvShowDetailsCard);
 }
 
 // Display Backdrop On Details Page

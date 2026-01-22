@@ -3,14 +3,20 @@ import { createMovieDetailsCard } from "../components/movie-details-card.js";
 
 // Display movie details
 export async function renderMovieDetails() {
-  const movieId = window.location.search.split("=")[1];
+  const movieId = new URLSearchParams(window.location.search).get("id");
+  if (!movieId) return;
+
   const movie = await TMDBService.fetchMovieDetailsById(movieId);
 
   // Overlay for background image
-  displayBackgroundImage("movie", movie.backdrop_path);
+  if (movie.backdrop_path) {
+    displayBackgroundImage("movie", movie.backdrop_path);
+  }
 
   const movieDetailsCard = createMovieDetailsCard(movie);
-  document.querySelector(".movie-details").appendChild(movieDetailsCard);
+  const container = document.querySelector(".movie-details");
+  if (!container) return;
+  container.appendChild(movieDetailsCard);
 }
 
 // Display Backdrop On Details Page

@@ -2,11 +2,13 @@ import { TMDBService } from "../api/tmdb-service.js";
 import { createMovieCard } from "../components/movie-card.js";
 
 export async function renderHomePage() {
+  const container = document.querySelector("#popular-movies");
+  if (!container) return;
+
   const { results } = await TMDBService.fetchPopularMovies();
 
   await displaySlider();
 
-  const container = document.querySelector("#popular-movies");
   results.forEach((movie) => {
     const movieCard = createMovieCard(movie);
     container.appendChild(movieCard);
@@ -17,7 +19,7 @@ export async function renderHomePage() {
 async function displaySlider() {
   const { results } = await TMDBService.fetchNowPlayingMovies();
   const wrapper = document.querySelector(".swiper-wrapper");
-  if (!wrapper) return;
+  if (!wrapper || !results?.length) return;
 
   wrapper.innerHTML = "";
 
