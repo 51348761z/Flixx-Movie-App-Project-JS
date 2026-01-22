@@ -1,3 +1,5 @@
+import { Spinner } from "../components/spiner.js";
+
 export class TMDBService {
   static async fetchPopularMovies() {
     return this.fetchApiData("movie/popular");
@@ -5,6 +7,8 @@ export class TMDBService {
 
   static async fetchApiData(endpoint) {
     const API_URL = "https://api.themoviedb.org/3";
+
+    Spinner.showSpinner();
     const response = await fetch(
       `${API_URL}/${endpoint}?language=en-US&page=1`,
       {
@@ -15,6 +19,8 @@ export class TMDBService {
         },
       },
     );
+
+    Spinner.hideSpinner();
 
     if (!response.ok) {
       throw new Error(`API request failed: ${response.status}`);
