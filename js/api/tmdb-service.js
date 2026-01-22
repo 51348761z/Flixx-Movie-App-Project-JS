@@ -5,6 +5,10 @@ export class TMDBService {
     return this.fetchApiData("movie/popular");
   }
 
+  static async fetchPopularTvShows() {
+    return this.fetchApiData("tv/popular");
+  }
+
   static async fetchApiData(endpoint) {
     const API_URL = "https://api.themoviedb.org/3";
 
